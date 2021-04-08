@@ -1,0 +1,8 @@
+.imgAcs-container {
+    margin-left: 50px;
+    display: flex;
+}
+
+.imgAcs-container center {
+    margin-left: -20px;
+}

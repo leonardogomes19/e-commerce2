@@ -1,0 +1,21 @@
+.main-banner {
+    background: url('../../assets/tecnologia_Foto-ilustrativa-Freepik-capa.jpg') no-repeat;
+    background-size: cover;
+    background-position: 0 55%;
+    position: relative;
+}
+
+.search-form {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    text-align: center;
+}
+
+.search-form h1 {
+    font-size: 40px;
+    color:white;
+}

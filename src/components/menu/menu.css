@@ -1,0 +1,53 @@
+:root {
+  --cor-fundo: rgb(34, 41, 37);
+  --cor-hover: rgb(118, 180, 145);
+  --cor-primaria: rgb(231, 241, 236);
+}
+
+.menu{
+  background-color:sienna;
+}
+
+.menu ul {
+  margin-top: 0;
+  max-width: 800px;
+  list-style: none;
+  padding-left: 300px;
+}
+
+.menu ul li {
+  display: inline;
+}
+
+.menu ul li a {
+  color: #FFF;
+  padding: 38px;
+  display: inline-block;
+  text-decoration: none;
+  transition: background .4s;
+}
+
+.menu ul li a:hover {
+  background-color: rgb(24, 139, 233);
+}
+
+.menu ul ul {
+  display: none;
+  left: 0;
+  position: absolute;
+}
+
+.menu ul li:hover ul {
+  display: block;
+}
+
+.menu ul ul {
+  width: 150px
+}
+
+.menu ul ul li a {
+  background-color:sandybrown;
+  margin-left: 115px;
+  width: 85px;
+  display: block;
+}
