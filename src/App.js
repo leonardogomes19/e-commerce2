@@ -1,8 +1,9 @@
-import React from 'react';
-import api from './api';
+import React, { useEffect, useState } from 'react'; // importar de react
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // Pages
+import Cart from './pages/carrinhoCompras/CarrinhoCompras';
+import Products from './pages/produtos_home/Products';
 import Pagina_Computador from './pages/pagina_computador/Pagina_Computador';
 //import Pagina_Monitor from './pages/pagina_monitor/Pagina_Monitor';
 import Pagina_Celulares from './pages/pagina_celulares/Pagina_Celulares';
@@ -16,17 +17,66 @@ import Lancamentos from './pages/lancamentos/Lancamentos';
 import Menu from './components/menu/menu';
 import Banner from './components/banner/banner';
 
-// Assets
-import celular1 from './assets/celulares/samsung-galaxy-a10s.jpg';
-import computador1 from './assets/computadores/computador-desktop-completo-easypc.jpg';
-import televisao1 from './assets/televisao/smart-tv-led-50-philips.jpg';
-
 // CSS
 import './App.css';
+
+//Icons
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+const PAGE_PRODUCTS = 'products';
+const PAGE_CART = 'cart';
+
+const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
+
+function Home() {
+  const [cart, setCart] = useState(cartFromLocalStorage);
+  const [page, setPage] = useState(PAGE_PRODUCTS);
+
+  //estado utilizado para armazenar a variavel no localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const removeFromCart = (productToRemove) => {
+    setCart(
+      cart.filter((product) => product !== productToRemove),
+    );
+  };
+
+  const addToCart = (product) => {
+    setCart([...cart, { ...product }]);
+  };
+
+  const navigateTo = (nextPage) => {
+    setPage(nextPage);
+  };
+
+  return (
+
+    <div>
+      <div class="cart-item">
+        <div class="icon">
+            <ShoppingCartIcon fontSize="large" color="white" />
+            <a type="button" id="carrinho" onClick={() => navigateTo(PAGE_CART)}>
+              Carrinho ({cart.length ===  0 ? "": cart.length})
+            </a>
+        </div>
+      </div>
+      {page === PAGE_PRODUCTS && (
+        <Products addToCart={addToCart}/>
+      )}
+      {page === PAGE_CART && (
+        <Cart cart={cart} removeFromCart={removeFromCart}/>
+      )}
+      </div>
+  );
+
+}
 
 function App() {
   return (
     <div className="App">
+
       <Banner />
       <Menu />
       <BrowserRouter>
@@ -45,33 +95,5 @@ function App() {
   );
 }
 
-const Home = () => (
-  <div>
-    <center>
-      <h1>Destaques</h1>
-    </center>
-    <div class="img-container">
-      <center>
-        <img src={celular1} width='40%'></img>
-        <p>Samsung Galaxy A10s</p>
-        <h3>R$759,05</h3>
-      </center>
-      <center>
-        <img src={computador1} width='40%'></img>
-        <p>Computador Desktop Completo Com Monitor 24" <br />
-          Full HD LED HDMI Intel Core i5 8GB HD 1TB <br />
-          Com Caixas De Som Mouse e Teclado EasyPC <br />
-          Standard Plus</p>
-        <h3>R$2.636,99</h3>
-      </center>
-      <center>
-        <img src={televisao1} width='40%'></img>
-        <p>Smart TV LED 50" Philips Série 6600 4K <br />
-          HDR 50PUG6654/78</p>
-        <h3>R$2.200,79</h3>
-      </center>
-    </div>
-  </div>
-);
 
 export default App;

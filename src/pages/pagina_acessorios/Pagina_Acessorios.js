@@ -1,32 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Pagina_Acessorios.css';
-import acessorio1 from '../../assets/acessorios/fone-de-ouvido-stereo-dobravel-mdr-zx110-preto-sony2.jpg';
-import acessorio2 from '../../assets/acessorios/philips-she-1350-00-fone-ouvido.jpg';
-import acessorio3 from '../../assets/acessorios/mouse-com-fio-usb-logitech-m90-cinza.jpg';
+
+import Cart from '../carrinhoCompras/CarrinhoCompras';
+import Products from './Products';
+
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+const PAGE_PRODUCTS = 'products';
+const PAGE_CART = 'cart';
+
+const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 
 export default function Pagina_Acessorios() {
+    const [cart, setCart] = useState(cartFromLocalStorage);
+    const [page, setPage] = useState(PAGE_PRODUCTS);
+
+    //estado utilizado para armazenar a variavel no localStorage
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
+
+    const removeFromCart = (productToRemove) => {
+        setCart(
+            cart.filter((product) => product !== productToRemove),
+        );
+    };
+
+    const addToCart = (product) => {
+        setCart([...cart, { ...product }]);
+    };
+
+    const navigateTo = (nextPage) => {
+        setPage(nextPage);
+    };
+
     return (
+
         <div>
-            <div class="imgAcs-container">
-                <center>
-                    <img src={acessorio1} width='20%'></img>
-                    <p>Sony MDR-ZX110 - Fone de Ouvido <br/>
-                    Dobrável, Preto</p>
-                    <h3>R$89,00</h3>
-                </center>
-                <center>
-                    <img src={acessorio2} width='40%'></img>
-                    <p>Philips SHE1350/00 Fone Ouvido <br/>
-                    - Pto</p>
-                    <h3>R$19,90</h3>
-                </center>
-                <center>
-                    <img src={acessorio3} width='40%'></img>
-                    <p>Mouse com fio USB Logitech M90 <br/> 
-                    - Cinza</p>
-                    <h3>R$24,90</h3>
-                </center>
+            <div class="cart-item">
+                <div class="icon">
+                    <ShoppingCartIcon fontSize="large" color="white" />
+                    <a type="button" id="carrinho" onClick={() => navigateTo(PAGE_CART)}>
+                        Carrinho ({cart.length === 0 ? "" : cart.length})
+                    </a>
+                </div>
             </div>
+            {page === PAGE_PRODUCTS && (
+                <Products addToCart={addToCart} />
+            )}
+            {page === PAGE_CART && (
+                <Cart cart={cart} removeFromCart={removeFromCart} />
+            )}
         </div>
-    )
+    );
+
 }
