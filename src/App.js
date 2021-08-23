@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'; // importar de react
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // Pages
+import TelaLogin from './pages/telaLogin/telaLogin';
+import TelaCadastro from './pages/telaCadastro/telaCadastro';
 import Cart from './pages/carrinhoCompras/CarrinhoCompras';
 import Products from './pages/produtos_home/Products';
 import Pagina_Computador from './pages/pagina_computador/Pagina_Computador';
@@ -22,6 +24,7 @@ import './App.css';
 
 //Icons
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import InputIcon from '@material-ui/icons/Input';
 
 const PAGE_PRODUCTS = 'products';
 const PAGE_CART = 'cart';
@@ -52,25 +55,31 @@ function Home() {
   };
 
   return (
-
     <div>
+      <div class="loginOp">
+        <div class="iconLogin">
+          <InputIcon fontSize="large" color="white" />
+          <a type="button" id="login" href="/login">
+            Login
+          </a>
+        </div>
+      </div>
       <div class="cart-item">
         <div class="icon">
-            <ShoppingCartIcon fontSize="large" color="white" />
-            <a type="button" id="carrinho" onClick={() => navigateTo(PAGE_CART)}>
-              Carrinho ({cart.length ===  0 ? "": cart.length})
-            </a>
+          <ShoppingCartIcon fontSize="large" color="white" />
+          <a type="button" id="carrinho" onClick={() => navigateTo(PAGE_CART)}>
+            Carrinho ({cart.length === 0 ? "" : cart.length})
+          </a>
         </div>
       </div>
       {page === PAGE_PRODUCTS && (
-        <Products addToCart={addToCart}/>
+        <Products addToCart={addToCart} />
       )}
       {page === PAGE_CART && (
-        <Cart cart={cart} removeFromCart={removeFromCart}/>
+        <Cart cart={cart} removeFromCart={removeFromCart} />
       )}
-      </div>
+    </div>
   );
-
 }
 
 function App() {
@@ -82,6 +91,8 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={TelaLogin} />
+          <Route exact path="/cadastro" component={TelaCadastro} />
           <Route exact path="/pagina-computador" component={Pagina_Computador} />
           <Route exact path="/pagina-celulares" component={Pagina_Celulares} />
           <Route exact path="/pagina-acessorios" component={Pagina_Acessorios} />

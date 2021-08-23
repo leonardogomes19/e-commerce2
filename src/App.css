@@ -134,6 +134,34 @@
     filter: brightness(80%);
 }
 
+.loginOp {
+    padding: 5px 0px;
+    margin-top: 20px;
+    width: 100px;
+    border: solid 2px yellow;
+    border-radius: 15px;
+    position: absolute;
+    top: 25px;
+    right: 180px;
+    background: gold;
+  
+  }
+  
+  .iconLogin {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  
+  }
+  
+  .iconLogin a {
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 0.8;
+  }
+
 .cart-item {
     padding: 5px 0px;
     margin-top: 20px;
