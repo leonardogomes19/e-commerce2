@@ -1,12 +1,12 @@
 .img-container {
-    display: flex;
     padding-top: 85px;
+    display: inline-block;
 }
 
 .products {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 .product {
     width:450px;
@@ -146,6 +146,19 @@
     background: gold;
   
   }
+
+  .cadastroOp {
+    padding: 5px 0px;
+    margin-top: 20px;
+    width: 100px;
+    border: solid 2px yellow;
+    border-radius: 15px;
+    position: absolute;
+    top: 25px;
+    right: 300px;
+    background: gold;
+  
+  }
   
   .iconLogin {
     display: flex;
@@ -194,5 +207,4 @@
     padding: 0 12px;
     color: #000;
     
-  
   }

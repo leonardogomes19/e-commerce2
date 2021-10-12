@@ -6,7 +6,7 @@ import * as FiIcons from 'react-icons/fi';
 import SideMenu from '../sideMenu/sideMenu';
 import riscoMenu from '../../assets/risco-menu.png';
 import '../menu/menu.css';
-
+import '../../responsivo/Menu-Responsivo.css';
 
 export default function Menu() {
 
@@ -16,7 +16,7 @@ export default function Menu() {
         <li><a type="button" href="/">Home</a></li>
         <li><a type="button" href="#">Categorias</a>
           <ul>
-            <li><a type="button" href="/pagina-televisao">Televisão</a></li>
+            <li><a type="button" href="/pagina-computador">Computadores</a></li>
             <li><a type="button" href="/pagina-celulares">Celulares</a></li>
             <li><a type="button" href="/pagina-acessorios">Acessórios</a></li>
           </ul>
@@ -24,6 +24,7 @@ export default function Menu() {
         <li><a type="button" href="/promocoes-do-dia">Promoções do Dia</a></li>
         <li><a type="button" href="/eletronicos">Eletrônicos</a></li>
         <li><a type="button" href="/lancamentos">Lançamentos</a></li>
+        <li><a type="button" href="/suporte">Suporte</a></li>
       </ul>
     </nav>
 

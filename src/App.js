@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'; // importar de react
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import StoreProvider from './components/store/provider';
+import RoutesPrivate from './components/routes/private/private';
+
 
 // Pages
 import TelaLogin from './pages/telaLogin/telaLogin';
@@ -14,13 +17,16 @@ import Pagina_Televisao from './pages/pagina_televisao/Pagina_Televisao';
 import PromocoesDoDia from './pages/promocoesDoDia/PromocoesDoDia';
 import Eletronicos from './pages/eletronicos/Eletronicos';
 import Lancamentos from './pages/lancamentos/Lancamentos';
+import TelaSuporte from './pages/telaSuporte/telaSuporte';
 
 // Components
 import Menu from './components/menu/menu';
 import Banner from './components/banner/banner';
+import Footer from './components/footer/footer';
 
 // CSS
 import './App.css';
+import './responsivo/TelaInicial-Responsiva.css';
 
 //Icons
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -40,27 +46,60 @@ function Home() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const removeFromCart = (productToRemove) => {
+  const removeFromCart = (product) => {
+    const exist = cart.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCart(cart.filter((x) => x.id !== product.id));
+    } else {
+      setCart(
+        cart.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+
+/*   const removeFromCart = (productToRemove) => {
     setCart(
       cart.filter((product) => product !== productToRemove),
     );
-  };
+  }; */
 
   const addToCart = (product) => {
-    setCart([...cart, { ...product }]);
+    const exist = cart.find(x => x.id === product.id); 
+    if(exist) {
+    setCart(cart.map(x => x.id === product.id ? {...exist, qty: exist.qty +1} : x
+      )
+      );
+    } else {
+      setCart([...cart, { ...product, qty: 1}])
+    }
   };
+
+/*   const addToCart = (product) => {
+    setCart([...cart, { ...product }]);
+  }; */
 
   const navigateTo = (nextPage) => {
     setPage(nextPage);
   };
 
   return (
+
     <div>
       <div class="loginOp">
         <div class="iconLogin">
           <InputIcon fontSize="large" color="white" />
           <a type="button" id="login" href="/login">
             Login
+          </a>
+        </div>
+      </div>
+      <div class="cadastroOp">
+        <div class="iconLogin">
+          <InputIcon fontSize="large" color="white" />
+          <a type="button" id="login" href="/cadastro">
+            Cadastro
           </a>
         </div>
       </div>
@@ -76,7 +115,7 @@ function Home() {
         <Products addToCart={addToCart} />
       )}
       {page === PAGE_CART && (
-        <Cart cart={cart} removeFromCart={removeFromCart} />
+        <Cart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart}  />
       )}
     </div>
   );
@@ -88,10 +127,12 @@ function App() {
 
       <Banner />
       <Menu />
+      <StoreProvider>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={TelaLogin} />
+{/*           <RoutesPrivate path="/" component={Home} /> */}
           <Route exact path="/cadastro" component={TelaCadastro} />
           <Route exact path="/pagina-computador" component={Pagina_Computador} />
           <Route exact path="/pagina-celulares" component={Pagina_Celulares} />
@@ -100,8 +141,11 @@ function App() {
           <Route exact path="/promocoes-do-dia" component={PromocoesDoDia} />
           <Route exact path="/eletronicos" component={Eletronicos} />
           <Route exact path="/lancamentos" component={Lancamentos} />
+          <Route exact path="/suporte" component={TelaSuporte} />
         </Switch>
       </BrowserRouter>
+      </StoreProvider>
+      <Footer />
     </div>
   );
 }
