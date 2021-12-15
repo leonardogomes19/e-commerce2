@@ -1,20 +1,16 @@
-.main-banner {
+header.main-banner {
     background: url('../../assets/tecnologia_Foto-ilustrativa-Freepik-capa.jpg') no-repeat;
-    background-size: cover;
-    background-position: 0 55%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 7px;
-
+    width: 100%;
+    max-width: 1325px;
+    float: left;
+    text-align: center;
+    padding: 3% 4%;
 }
 
 .search-form {
     position: relative;
     width: 80%;
-    margin-left: auto;
+    margin-left: -200px;
     margin-right: auto;
     padding-top: 1px;
     padding-bottom: 1px;

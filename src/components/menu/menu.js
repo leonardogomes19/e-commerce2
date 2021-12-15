@@ -12,7 +12,9 @@ export default function Menu() {
 
   return (
     <nav class="menu">
-      <ul>
+        <input type="checkbox" class="toggle-menu"/>
+        <div class="hamburger"></div>
+      <ul class="nav-list">
         <li><a type="button" href="/">Home</a></li>
         <li><a type="button" href="#">Categorias</a>
           <ul>
@@ -21,8 +23,8 @@ export default function Menu() {
             <li><a type="button" href="/pagina-acessorios">Acessórios</a></li>
           </ul>
         </li>
-        <li><a type="button" href="/promocoes-do-dia">Promoções do Dia</a></li>
-        <li><a type="button" href="/eletronicos">Eletrônicos</a></li>
+        <li><a type="button" href="/promocoes-do-dia">Promoções</a></li>
+        {/* <li><a type="button" href="/eletronicos">Eletrônicos</a></li> */}
         <li><a type="button" href="/lancamentos">Lançamentos</a></li>
         <li><a type="button" href="/suporte">Suporte</a></li>
       </ul>

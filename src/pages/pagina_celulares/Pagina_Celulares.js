@@ -11,7 +11,7 @@ const PAGE_CART = 'cart';
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 
-export default function Pagina_Acessorios() {
+export default function Pagina_Celulares() {
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [page, setPage] = useState(PAGE_PRODUCTS);
 

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const Swal = require('sweetalert2');
 const app = express();
 const mysql = require("mysql");
 //const bcrypt = require('bcrypt');
@@ -19,25 +20,25 @@ app.post("/register", (req, res) => {
     const password = req.body.password;
 
     db.query("SELECT * FROM cadastros WHERE login = ?", [login],
-    (err, result) => {
-        if (err) {
-            res.send(err);
-        }
-        if(result.length == 0){
-            db.query("INSERT INTO cadastros (login, password) VALUES (?, ?)",
-             [login, password], (err, resultado) => {
-                    if(err){
-                        res.send(err);
-                    }
+        (err, result) => {
+            if (err) {
+                res.send(err);
+            }
+            if (result.length == 0) {
+                db.query("INSERT INTO cadastros (login, password) VALUES (?, ?)",
+                    [login, password], (err, resultado) => {
+                        if (err) {
+                            res.send(err);
+                        }
 
-                    res.send({msg: "Cadastrado com sucesso!"})
-                }
-            );
-        } else {
-            res.send({ msg: "Usuário já cadastrado!" });
-        }
-        
-    });
+                        res.send({ msg: "Cadastrado com sucesso!" })
+                    }
+                );
+            } else {
+                res.send({ msg: "Usuário já cadastrado!" });
+            }
+
+        });
 });
 
 app.post("/login", (req, res) => {
@@ -45,17 +46,22 @@ app.post("/login", (req, res) => {
     const password = req.body.password;
 
     db.query("SELECT * FROM cadastros WHERE login = ? AND password = ?", [login, password], (err, result) => {
-         if(err){
-             res.send(err);
-         }
-         if(result.length > 0){
-                    res.send({msg: "Usuário logado com sucesso!"});
-                 } else {
-                    res.send({msg: "Conta não encontrada!"});
-                 }
-             });
-         }
-    )
+        if (err) {
+            res.send(err);
+        }
+        if (result.length > 0) {
+            res.send({ msg: "Usuário logado com sucesso!" });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Conta não encontrada!',
+              })
+            res.send({ msg: "Conta não encontrada!" });
+        }
+    });
+}
+)
 
 app.listen(3001, () => {
     console.log("Rodando na porta 3001");

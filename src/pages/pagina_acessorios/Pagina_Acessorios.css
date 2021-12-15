@@ -122,7 +122,7 @@ button {
 
 
 button:first-child {
-    background: yellow;
+    /* background: yellow; */
     font-weight: bold;
     transition: filter 0.5s;
 
