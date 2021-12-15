@@ -28,7 +28,7 @@ import ChatBotSimples from './components/chatbot/chatbot';
 
 // CSS
 import './App.css';
-//import './TelaInicial-Responsiva.css';
+import './responsivo/TelaInicial-Responsiva.css';
 
 //Icons
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';

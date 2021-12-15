@@ -1,6 +1,6 @@
 import React from 'react';
 import '../banner/banner.css';
-import '../../Banner-Responsivo.css';
+import '../../responsivo/Banner-Responsivo.css';
 
 function Banner() {
     return (
